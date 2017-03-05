@@ -90,7 +90,7 @@ namespace Mercadorias
 
             using (SqlConnection conn = ConnetionFactory.ConexaoSqlSever())
             {
-                conn.Open();
+                
                 // Cria um comando para atualizar um registro da tabela
                 using (SqlCommand cmd = new SqlCommand("UPDATE mercadorias SET tipoMercadoria = @tpMerc, nomeMercadoria = @nomeMerc, tipoNegocio = @tpNeg, quantidade = @quant, preco = @preco WHERE idMercadoria = @id", conn))
                 {
