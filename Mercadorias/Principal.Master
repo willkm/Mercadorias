@@ -1,0 +1,37 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Principal.master.cs" Inherits="Mercadorias.Principal" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+<head runat="server">
+
+    <title>Controle de Mercadorias</title>
+    <!-- Bootstrap -->
+    <link href="Source/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#txtValor").mask("99/99/9999");
+           
+        });
+    </script>
+
+</head>
+
+<body>
+    <form id="form1" runat="server" class="form-horizontal" data-toggle="validator" role="form">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src="Source/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        </div>
+    </form>
+</body>
+</html>
