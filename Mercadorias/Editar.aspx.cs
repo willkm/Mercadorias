@@ -1,7 +1,7 @@
 ﻿using Mercadorias.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,14 +15,13 @@ namespace Mercadorias
         {
             if (IsPostBack == false)
             {
-                //recuperando o id do registro pela queryString
+
                 int id;
                 if (int.TryParse(Request.QueryString["id"], out id) == false)
                 {
                     return;
                 }
 
-                //Itens do DropDownList
                 ddlTpNegocio.DataTextField = "tipoNegocio";
                 ddlTpNegocio.DataValueField = "id";
                 ddlTpNegocio.DataBind();
@@ -32,15 +31,15 @@ namespace Mercadorias
                 try
                 {
                     //abre uma conexão com o banco
-                    using (SqlConnection conn = ConnetionFactory.ConexaoSqlSever())
+                    using (MySqlConnection conn = ConnetionFactory.ConexaoMySql())
                     {
 
                         //Cria um comando para selecionar registros da tabela
-                        using (SqlCommand cmd = new SqlCommand("SELECT * FROM mercadorias WHERE idMercadoria =@id", conn))
+                        using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM mercadorias WHERE idMercadoria =@id", conn))
                         {
                             cmd.Parameters.AddWithValue("@id", id);
-                           
-                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            conn.Open();
+                            using (MySqlDataReader reader = cmd.ExecuteReader())
                             {
                                 // Obtém os registros, um por vez
                                 while (reader.Read() == true)
@@ -68,7 +67,6 @@ namespace Mercadorias
             }
         }
 
-        // botão que salva as alterções
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
             int id;
@@ -90,11 +88,11 @@ namespace Mercadorias
                 return;
             }
 
-            using (SqlConnection conn = ConnetionFactory.ConexaoSqlSever())
+            using (MySqlConnection conn = ConnetionFactory.ConexaoMySql())
             {
-                
+                conn.Open();
                 // Cria um comando para atualizar um registro da tabela
-                using (SqlCommand cmd = new SqlCommand("UPDATE mercadorias SET tipoMercadoria = @tpMerc, nomeMercadoria = @nomeMerc, tipoNegocio = @tpNeg, quantidade = @quant, preco = @preco WHERE idMercadoria = @id", conn))
+                using (MySqlCommand cmd = new MySqlCommand("UPDATE mercadorias SET tipoMercadoria = @tpMerc, nomeMercadoria = @nomeMerc, tipoNegocio = @tpNeg, quantidade = @quant, preco = @preco WHERE idMercadoria = @id", conn))
                 {
                     cmd.Parameters.AddWithValue("@tpMerc", tipoMercadoria);
                     cmd.Parameters.AddWithValue("@nomeMerc", nomeMercadoria);
