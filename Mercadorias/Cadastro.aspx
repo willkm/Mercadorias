@@ -5,9 +5,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-
+    <!-- Página inicial -->
     <div class="container">
 
+        <!-- Abas -->
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home">Cadastro</a></li>
             <li><a data-toggle="tab" href="#menu1">Lista de Mercadorias</a></li>
@@ -15,15 +16,12 @@
 
         <div class="tab-content">
 
-
-
             <div id="home" class="tab-pane fade in active">
 
-
+                <!-- Aba de cadastro -->
                 <div class="container">
                     <h2>Cadastro de novas mercadorias</h2>
-
-       
+     
                     <div class="form-group">
                         <label for="textNome" class="control-label">Nome :</label>
                         <asp:TextBox runat="server" ID="textNome" class="form-control" placeholder="Digite o nome do produto"
@@ -76,7 +74,7 @@
                             <div class="form-row">
 
                                 <div class="input-group">
-                                    <asp:Button runat="server" ID="btnSalvar" Text="Cadastrar" OnClick="btnEnviar_Click" type="submit" class="btn btn-primary" />
+                                    <asp:Button runat="server" ID="btnCadastrar" Text="Cadastrar" OnClick="btnCadastrar_Click" type="submit" class="btn btn-primary" />
                                 </div>
                             </div>
 
@@ -84,16 +82,12 @@
 
                     </div>
 
-
-
                 </div>
-
 
             </div>
 
-
+            <!-- Aba com a lista de mercadorias  -->
             <div id="menu1" class="tab-pane fade">
-
 
                 <div class="container">
                     <h2>Mercadorias cadastradas</h2>
@@ -109,7 +103,7 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <!-- repeater para listar os registos(Objetos) do banco -->
                             <asp:Repeater runat="server" ID="listRepeater">
                                 <ItemTemplate>
                                     <tr>

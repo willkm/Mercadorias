@@ -1,7 +1,8 @@
 ﻿using Mercadorias.Models;
-using MySql.Data.MySqlClient;
+
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -26,15 +27,15 @@ namespace Mercadorias
                 try
                 {
                     //abre uma conexão com o banco
-                    using (MySqlConnection conn = ConnetionFactory.ConexaoMySql())
+                    using (SqlConnection conn = ConnetionFactory.ConexaoSqlSever())
                     {
 
                         //Cria um comando para selecionar registros da tabela
-                        using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM mercadorias ORDER BY idMercadoria ASC", conn))
+                        using (SqlCommand cmd = new SqlCommand("SELECT * FROM mercadorias ORDER BY idMercadoria ASC", conn))
                         {
 
-                            conn.Open();
-                            using (MySqlDataReader reader = cmd.ExecuteReader())
+                           
+                            using (SqlDataReader reader = cmd.ExecuteReader())
                             {
                                 // Obtém os registros, um por vez
                                 while (reader.Read() == true)
@@ -70,7 +71,8 @@ namespace Mercadorias
 
         }
 
-        protected void btnEnviar_Click(object sender, EventArgs e)
+        //Botão de cadastro
+        protected void btnCadastrar_Click(object sender, EventArgs e)
         {
 
             string nomeMercadoria = textNome.Text;
@@ -86,13 +88,13 @@ namespace Mercadorias
                 return;
             }
 
-            
 
-            using (MySqlConnection conn = ConnetionFactory.ConexaoMySql())
+            //abre uma conexão com o banco
+            using (SqlConnection conn = ConnetionFactory.ConexaoSqlSever())
             {
-                conn.Open();
+                
                 // Cria um comando para selecionar registros da tabela
-                using (MySqlCommand cmd = new MySqlCommand("insert into mercadorias (tipoMercadoria, nomeMercadoria, tipoNegocio, quantidade, preco) VALUES (@tipoMercadoria, @nomeMercadoria, @tipoNegocio, @quantidade, @preco);", conn))
+                using (SqlCommand cmd = new SqlCommand("insert into mercadorias (tipoMercadoria, nomeMercadoria, tipoNegocio, quantidade, preco) VALUES (@tipoMercadoria, @nomeMercadoria, @tipoNegocio, @quantidade, @preco);", conn))
                 {
 
 

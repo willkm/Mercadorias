@@ -1,7 +1,7 @@
 ﻿using Mercadorias.Models;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -18,15 +18,15 @@ namespace Mercadorias
             List<Mercadoria> mercadorias = new List<Mercadoria>();
             try
             {
-                using (MySqlConnection conn = ConnetionFactory.ConexaoMySql())
+                using (SqlConnection conn = ConnetionFactory.ConexaoSqlSever())
                 {
 
                     //Cria um comando para selecionar registros da tabela
-                    using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM mercadorias ORDER BY idMercadoria ASC", conn))
+                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM mercadorias ORDER BY idMercadoria ASC", conn))
                     {
 
-                        conn.Open();
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             // Obtém os registros, um por vez
                             while (reader.Read() == true)

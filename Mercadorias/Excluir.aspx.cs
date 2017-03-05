@@ -1,7 +1,7 @@
 ﻿using Mercadorias.Models;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -22,10 +22,10 @@ namespace Mercadorias
 
             try
             {
-                using (MySqlConnection con = ConnetionFactory.ConexaoMySql())
+                using (SqlConnection con = ConnetionFactory.ConexaoSqlSever())
                 {
-                    con.Open();
-                    using (MySqlCommand comando = new MySqlCommand("DELETE FROM mercadorias where idMercadoria = @id", con))
+                    
+                    using (SqlCommand comando = new SqlCommand("DELETE FROM mercadorias where idMercadoria = @id", con))
                     {
                         comando.Parameters.AddWithValue("@id", id);
                         comando.ExecuteNonQuery();
@@ -34,7 +34,7 @@ namespace Mercadorias
                 }
 
             }
-            catch (MySqlException)
+            catch (SqlException)
             {
 
                 throw;
