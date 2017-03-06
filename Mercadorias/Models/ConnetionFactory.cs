@@ -12,7 +12,7 @@ namespace Mercadorias.Models
 
             try
             {
-                SqlConnection conn = new SqlConnection("Server=tcp:cadastro.database.windows.net,1433;Initial Catalog=Cadastro;Persist Security Info=False;User ID=willfelipe;Password=Band123ATW;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                SqlConnection conn = new SqlConnection("Server=tcp:cadastroproduto.database.windows.net,1433;Initial Catalog=CadastroProduto;Persist Security Info=False;User ID=willfelipe;Password=Band123ATW;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
                 conn.Open();
 
